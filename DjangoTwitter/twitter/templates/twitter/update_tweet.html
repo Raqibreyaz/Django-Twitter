@@ -1,0 +1,11 @@
+{% extends "layout.html" %}
+{% block title %}Update Tweet{% endblock %}
+{% block heading %}Update Tweet{% endblock %}
+
+{% block content %}
+<form method="POST" class="flex gap-2 flex-col">
+    {% csrf_token %}
+    {{form}}
+    <input type="submit" class="cursor-pointer bg-black text-white p-2 rounded-md w-1/2">
+</form>
+{% endblock %}

@@ -1,0 +1,18 @@
+{% extends "layout.html" %}
+
+{% block title %}{{tweet_details.title}}{% endblock %}
+
+{% block heading %}{{tweet_details.title}}{% endblock %}
+
+{% block content %}
+    {% if tweet_details.user == user %}
+        <div class="flex justify-end gap-3 p-0">
+            <a href="{% url 'update' tweet_details.id %}" class="bg-yellow-600 p-2 rounded-md mx-l">Update</a>
+            <a href="{% url 'delete' tweet_details.id %}" class="bg-rose-600 p-2 rounded-md mx-l">Delete</a>
+        </div>
+    {% endif %}
+<div class="mx-auto flex flex-col w-[90%] my-10 gap-5">
+    <img src={{tweet_details.image.url}} class="rounded-md size-full" alt="">
+    <p class="text-start text-lg">{{tweet_details.description}}</p>
+</div>
+{% endblock %}

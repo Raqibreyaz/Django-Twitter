@@ -1,0 +1,45 @@
+<!doctype html>
+<html data-bs-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <title>
+    {% block title %}Twitter{% endblock %}
+  </title>
+</head>
+<body class="bg-emerald-700/80 p-3 ">
+  <header class="sticky top-0 bg-transparent backdrop-blur flex items-center gap-10 pb-10 pt-4">
+    <a href="/">
+      <button class="text-3xl" type="button">Logo</button>
+    </a>
+    <nav class="flex text-lg gap-10 items-center ml-auto">
+      <div>
+        <form method="post">
+          {% csrf_token %}
+          <input type="text" name="search" class="p-2 bg-zinc-800 text-white rounded" placeholder="Search Tweets...">
+          <button type="submit" class="bg-blue-700 text-white p-2 rounded-md">search</button>
+        </form>
+      </div>
+      <div class="space-x-3 flex items-center">
+        <a href="/" class="bg-green-400 p-2 rounded-md">Go To Home</a>
+          {% if user.is_authenticated %}
+            <a href="/twitter/add" class="bg-blue-800 p-2 rounded-md text-white">Add a Tweet</a>
+            <form action="{% url 'logout' %}" method="post">
+              {% csrf_token %}
+              <button class="p-2 bg-red-500 rounded-md text-white">Logout</button>
+            </form>
+          {% else %}
+            <a href="{% url 'login' %}" class="">Login</a>
+            <a href="{% url 'register' %}" class="">Register</a>
+          {% endif %}
+
+      </div>
+    </nav>
+  </header>
+  <h1 class="text-3xl font-bold capitalize mb-5">
+    {% block heading %}{% endblock %}
+  </h1>
+  {% block content %}{% endblock %}
+</body>
+</html>
